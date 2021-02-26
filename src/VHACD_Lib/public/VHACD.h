@@ -147,12 +147,12 @@ class IVHACD {
                                  const uint32_t countPoints,
                                  const uint32_t* const triangles,
                                  const uint32_t countTriangles,
-                                 const Parameters& params) = 0;
+                                 const uint32_t resolution) = 0;
   virtual bool computeVoxelField(const double* const points,
                                  const uint32_t countPoints,
                                  const uint32_t* const triangles,
                                  const uint32_t countTriangles,
-                                 const Parameters& params) = 0;
+                                 const uint32_t resolution) = 0;
   virtual Volume* getVoxelField() = 0;
   virtual uint32_t GetNConvexHulls() const = 0;
   virtual void GetConvexHull(const uint32_t index, ConvexHull& ch) const = 0;

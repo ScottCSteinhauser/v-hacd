@@ -57,9 +57,9 @@ class MyHACD_API : public VHACD::IVHACD,
                                  const uint32_t countPoints,
                                  const uint32_t* const triangles,
                                  const uint32_t countTriangles,
-                                 const Parameters& _desc) {
+                                 const uint32_t resolution) {
     return mVHACD->computeVoxelField(points, countPoints, triangles,
-                                     countTriangles, _desc);
+                                     countTriangles, resolution);
   }
 
   virtual Volume* getVoxelField() { return mVHACD->getVoxelField(); }
@@ -191,7 +191,7 @@ class MyHACD_API : public VHACD::IVHACD,
                                  const uint32_t countPoints,
                                  const uint32_t* const triangles,
                                  const uint32_t countTriangles,
-                                 const Parameters& params) final {
+                                 const uint32_t resolution) final {
     double* vertices = (double*)HACD_ALLOC(sizeof(double) * countPoints * 3);
     const float* source = points;
     double* dest = vertices;
@@ -204,7 +204,7 @@ class MyHACD_API : public VHACD::IVHACD,
     }
 
     bool ret = computeVoxelField(vertices, countPoints, triangles,
-                                 countTriangles, params);
+                                 countTriangles, resolution);
     HACD_FREE(vertices);
     return ret;
   }

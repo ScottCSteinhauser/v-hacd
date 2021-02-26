@@ -284,6 +284,8 @@ class Volume {
   }
 
   const Vec3<double> getCenter() { return m_barycenter; }
+
+  const Vec3<double> getMinBB() { return m_minBB; }
   void Convert(Mesh& mesh, const VOXEL_VALUE value) const;
   void Convert(VoxelSet& vset) const;
   void Convert(TetrahedronSet& tset) const;

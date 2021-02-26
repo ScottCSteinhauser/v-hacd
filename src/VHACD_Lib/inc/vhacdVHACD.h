@@ -113,12 +113,12 @@ class VHACD : public IVHACD {
                          const uint32_t countPoints,
                          const uint32_t* const triangles,
                          const uint32_t countTriangles,
-                         const Parameters& params);
+                         const uint32_t resolution);
   bool computeVoxelField(const double* const points,
                          const uint32_t countPoints,
                          const uint32_t* const triangles,
                          const uint32_t countTriangles,
-                         const Parameters& params);
+                         const uint32_t resolution);
   Volume* getVoxelField();
   bool OCLInit(void* const oclDevice, IUserLogger* const logger = 0);
   bool OCLRelease(IUserLogger* const logger = 0);
@@ -351,18 +351,15 @@ class VHACD : public IVHACD {
                                const uint32_t nPoints,
                                const uint32_t* const triangles,
                                const uint32_t nTriangles,
-                               const Parameters& params) {
+                               const uint32_t resolution) {
     Init();
-    if (params.m_projectHullVertices) {
-      mRaycastMesh = RaycastMesh::createRaycastMesh(nPoints, points, nTriangles,
-                                                    (const uint32_t*)triangles);
-    }
-    if (params.m_oclAcceleration) {
-      // build kernels
-    }
-    AlignMesh(points, 3, nPoints, (int32_t*)triangles, 3, nTriangles, params);
+    /*AlignMesh(points, 3, nPoints, (int32_t*)triangles, 3, nTriangles, params);
     VoxelizeMesh(points, 3, nPoints, (int32_t*)triangles, 3, nTriangles,
-                 params);
+                 params);*/
+    m_dim = (size_t)(pow((double)resolution, 1.0 / 3.0) + 0.5);
+    m_volume = new Volume;
+    m_volume->Voxelize(points, 3, nPoints, (int32_t*)triangles, 3, nTriangles,
+                       m_dim, m_barycenter, m_rot);
     return true;
   }
 

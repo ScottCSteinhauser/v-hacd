@@ -479,17 +479,17 @@ bool VHACD::computeVoxelField(const float* const points,
                               const uint32_t countPoints,
                               const uint32_t* const triangles,
                               const uint32_t countTriangles,
-                              const Parameters& params) {
+                              const uint32_t resolution) {
   return computeVoxelFieldHelper(points, countPoints, triangles, countTriangles,
-                                 params);
+                                 resolution);
 }
 bool VHACD::computeVoxelField(const double* const points,
                               const uint32_t countPoints,
                               const uint32_t* const triangles,
                               const uint32_t countTriangles,
-                              const Parameters& params) {
+                              const uint32_t resolution) {
   return computeVoxelFieldHelper(points, countPoints, triangles, countTriangles,
-                                 params);
+                                 resolution);
 }
 
 Volume* VHACD::getVoxelField() {
